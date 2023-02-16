@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  - push
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+
+      - uses: pnpm/action-setup@v2.0.1
+        name: Install pnpm
+        with:
+          version: 7
+
+      - name: Run CI
+        run: |
+          pnpm install
+          pnpm build
